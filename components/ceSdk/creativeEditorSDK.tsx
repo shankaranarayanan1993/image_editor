@@ -10,7 +10,7 @@ interface Props {
     image?: File
 }
 const CeSdk = ({ image, config }: Props) => {
-
+    console.log('CeSdk image',image)
     const cesdk_container = useRef(null);
 
     useEffect(() => {
@@ -24,12 +24,20 @@ const CeSdk = ({ image, config }: Props) => {
 
                     }
 
-                    const blob = image ? fileToBlobConverter(image, callbackHandler) : await createBlog('/demo-image.jpeg');
-                    if (blob) {
-                        callbackHandler(blob);
+                    let blob;
+                    try {
+                        if (image) {
+                            blob = await fileToBlobConverter(image);
+                        } else {
+                            blob = await createBlog('/demo-image.jpeg');
+                        }
+                        if (blob) {
+                            callbackHandler(blob);
+                        }
+                    } catch (error) {
+                        console.error('Error processing image:', error);
                     }
-
-                    instance.engine.block.findByType('graphic')[0];
+                   
                 }
             );
         }

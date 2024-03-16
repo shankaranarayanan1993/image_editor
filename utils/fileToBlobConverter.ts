@@ -1,10 +1,10 @@
-export const fileToBlobConverter = (file: File, callback: (blob: any) => void) => {
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = (event) => {
-            const blob = new Blob([event.target?.result as ArrayBuffer]);
-            callback(blob)
-        };
-        reader.readAsArrayBuffer(file);
-    }
+export const fileToBlobConverter = (file: File): Promise<Blob> => {
+    return new Promise((resolve, reject) => {
+        if (!file) {
+            reject(new Error('No file provided'));
+            return;
+        }
+        const blob = new Blob([file], { type: file.type });
+        resolve(blob);
+    });
 };

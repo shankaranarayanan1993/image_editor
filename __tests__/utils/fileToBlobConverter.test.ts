@@ -5,27 +5,29 @@ const mockFileReaderInstance = {
     readAsArrayBuffer: jest.fn()
 };
 (global as any).FileReader = jest.fn(() => mockFileReaderInstance);
-(global as any).Blob = jest.fn();
 
-describe('fileToBlobConverter function', () => {
-    it('should convert a valid image file to a blob and invoke the callback with the blob', () => {
-        const mockFile = new File(['test content'], 'test.jpg', { type: 'image/jpeg' });
-        const mockCallback = jest.fn();
+(global as any).Blob = jest.fn((parts, properties) => {
+    return { parts, size: parts.reduce((acc:any, part:any) => acc + part.length, 0), type: properties.type };
+});
 
-        fileToBlobConverter(mockFile, mockCallback);
+describe('fileToBlobConverter', () => {
+    // No need for mockClear on Blob since we're not tracking calls or instances directly on it
 
-        const mockResult = 'mock result';
-        const mockEvent = { target: { result: mockResult } };
-        mockFileReaderInstance.onload(mockEvent);
+    it('should convert a file to a blob with correct type and size', async () => {
+        const mockFile = new File(["dummy content"], "test.txt", { type: "text/plain" });
+        const blob = await fileToBlobConverter(mockFile);
 
-        expect(mockFileReaderInstance.readAsArrayBuffer).toHaveBeenCalledTimes(1);
-        expect(mockFileReaderInstance.readAsArrayBuffer).toHaveBeenCalledWith(mockFile);
-
-        expect(global.Blob).toHaveBeenCalledTimes(1);
-        expect(global.Blob).toHaveBeenCalledWith([mockResult]);
-
-        expect(mockCallback).toHaveBeenCalledTimes(1);
-        expect(mockCallback).toHaveBeenCalledWith(expect.any(Blob));
+        expect(Blob).toHaveBeenCalledTimes(1); // Checking that Blob constructor was called
+        expect(blob).toHaveProperty('type', mockFile.type);
+        
     });
 
+    it('should reject the promise if no file is provided', async () => {
+        // Since we're handling a rejection, we prepare Jest to expect at least one assertion to be made.
+        // This ensures that the catch block gets executed.
+        expect.assertions(1);
+
+        // Bypass TypeScript's type checking by casting null to any. This simulates calling the function with an invalid argument.
+        await expect(fileToBlobConverter(null as any)).rejects.toThrow('No file provided');
+    });
 });

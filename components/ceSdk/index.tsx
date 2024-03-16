@@ -4,7 +4,7 @@ interface Props {
     image?: File
 }
 const CreativeEditorSDKWithNoSSR = ({ image }: Props) => {
-
+    console.log('CreativeEditorSDKWithNoSSR image',image)
     let config = {
         license: process.env.NEXT_PUBLIC_LICENSE,
         baseURL: 'https://cdn.img.ly/packages/imgly/cesdk-js/1.22.0/assets',

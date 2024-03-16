@@ -10,6 +10,7 @@ const Home = () => {
     const [image, setImage] = useState<File>();
 
     const imageHandler = (file: File) => {
+        console.log('Home file',file);
         setImage(file)
     }
 
