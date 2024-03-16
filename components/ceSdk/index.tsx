@@ -6,6 +6,7 @@ interface Props {
     image?: File
 }
 const CreativeEditorSDKWithNoSSR = ({ image }: Props) => {
+    console.log('CreativeEditorSDKWithNoSSR image',image)
 
     const { imagesHandler } = useContext(HomeContxt);
 
