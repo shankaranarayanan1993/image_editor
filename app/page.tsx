@@ -1,6 +1,11 @@
+import Home from "../components/home";
+import Container from '@mui/material/Container';
+
 const Page = () => {
   return (
-    <div>Get started</div>
+    <Container sx={{ marginTop: '100px' }}>
+      <Home />
+    </Container>
   );
 }
 
