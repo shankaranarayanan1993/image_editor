@@ -6,6 +6,8 @@ export interface IHomeContxtProvider {
 }
 
 export interface IHomeContxt {
-    savedImages: any,
+    savedImages: any;
+    importedImage: any;
     imagesHandler: (data: any) => void
+    importedImageHandler: (data: any) => void
 }

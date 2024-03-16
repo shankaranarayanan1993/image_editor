@@ -1,25 +1,25 @@
 import AppBar from '@mui/material/AppBar';
 import { Toolbar, Button, Input } from '@mui/material';
+import { useContext } from 'react';
+import { HomeContxt } from '@/data/homeContxt';
+import Link from 'next/link';
 
-interface Props {
-    imageHandler: (file: File) => void;
-}
+const HomeHeader = () => {
 
-const Header = ({ imageHandler }: Props) => {
-
+    const { importedImageHandler } = useContext(HomeContxt);
     const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
-        file && imageHandler(file)
+        file && importedImageHandler(file)
         event.target.value = "";
     };
 
     return (
         <AppBar position="static">
-            <Toolbar sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Toolbar sx={{ display: 'flex', justifyContent: 'flex-end', gap: "20px" }}>
                 <Input
                     id="file-upload"
                     type="file"
-                    inputProps={{ 'aria-label': 'upload file', accept:"image/png, image/jpg, image/jpeg"}}
+                    inputProps={{ 'aria-label': 'upload file', accept: "image/png, image/jpg, image/jpeg" }}
                     onChange={handleFileUpload}
                     style={{ display: 'none' }}
                 />
@@ -28,9 +28,12 @@ const Header = ({ imageHandler }: Props) => {
                         Upload
                     </Button>
                 </label>
+                <Link href={'/editor'} color="inherit" style={{ textDecoration: 'none' }}>
+                    Editor
+                </Link>
             </Toolbar>
         </AppBar>
     );
 }
 
-export default Header;
+export default HomeHeader;

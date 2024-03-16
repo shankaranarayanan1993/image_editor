@@ -6,7 +6,7 @@ interface Props {
     image?: File
 }
 const CreativeEditorSDKWithNoSSR = ({ image }: Props) => {
-    console.log('CreativeEditorSDKWithNoSSR image',image)
+    console.log('CreativeEditorSDKWithNoSSR image', image)
 
     const { imagesHandler } = useContext(HomeContxt);
 
@@ -21,30 +21,26 @@ const CreativeEditorSDKWithNoSSR = ({ image }: Props) => {
                 window.alert('Close callback!');
             },
             onSave: (scene: any) => {
-                window.alert('Save callback!');
-                // imagesHandler(scene);
+                console.log({ scene })
             },
             onLoad: () => {
                 window.alert('Load callback!');
-                const scene = '...'; // Fill with sene
+                const scene = '...';
                 return Promise.resolve(scene);
             },
             onExport: (blobs: any, options: any) => {
-                window.alert('Export callback!');
-                console.info(options.mimeType);
-                console.info(options.jpegQuality);
-                console.info(options.pages);
-                return Promise.resolve();
+                const url = URL.createObjectURL(blobs[0]);
+                imagesHandler(url)
             }
         },
         ui: {
             elements: {
                 navigation: {
                     action: {
-                        close: true,
-                        back: true,
-                        save: true,
-                        load: true,
+                        close: false,
+                        back: false,
+                        save: false,
+                        load: false,
                         export: true
                     }
                 }

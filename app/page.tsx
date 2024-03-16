@@ -3,7 +3,7 @@ import Container from '@mui/material/Container';
 
 const Page = () => {
   return (
-    <Container sx={{ marginTop: '100px' }}>
+    <Container sx={{ marginTop: '50px' }}>
       <Home />
     </Container>
   );

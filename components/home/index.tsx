@@ -1,13 +1,24 @@
-import HomeContxtProvider from "@/data/homeContxt";
-import Home from "./home";
+'use client'
+import { useContext } from "react";
+import Header from "./header";
+import Card from "./card";
+import { Grid, Box } from '@mui/material';
+import { HomeContxt } from "@/data/homeContxt";
 
-const Index = () => {
+const Home = () => {
+
+    const { savedImages } = useContext(HomeContxt);
 
     return (
-        <HomeContxtProvider>
-            <Home />
-        </HomeContxtProvider>
+        <>
+            <Header />
+            <Grid container spacing={2}>
+                {savedImages?.map((item: any, index: number) => (
+                    <Card key={index} item={item} />
+                ))}
+            </Grid>
+        </>
     );
 }
 
-export default Index;
+export default Home;
