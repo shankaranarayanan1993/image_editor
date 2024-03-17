@@ -52,6 +52,13 @@ const Home = () => {
         <>
             <Header imageHandler={imageUploadHandler} image={importedImage} />
 
+            <Box sx={{
+                marginTop: "2%",
+                marginBottom: '2%',
+                fontSize: '20px',
+                fontWeight: '700'
+            }}>Change background for your selected images in below editor</Box>
+
             <Box sx={{ marginTop: '20px' }}>
                 <CreativeEditorSDKWithNoSSR image={bgRemovedImage} imageExportHandler={imageExportHandler} />
             </Box>

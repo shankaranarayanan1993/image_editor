@@ -37,7 +37,10 @@ const CreativeEditorSDKWithNoSSR = ({ image, imageExportHandler }: Props) => {
                         back: false,
                         save: false,
                         load: false,
-                        export: true
+                        export: {
+                            show: true,
+                            format: ['image/png']
+                        },
                     }
                 }
             }

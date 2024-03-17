@@ -1,7 +1,6 @@
 import AppBar from '@mui/material/AppBar';
-import { Toolbar, Button, Input, Box } from '@mui/material';
+import { Toolbar, Button, Input, Box, Typography } from '@mui/material';
 import SelectedImage from './selectedImage';
-import { fileToBlobConverter } from '@/utils/fileToBlobConverter';
 
 interface Props {
     imageHandler: (data: any) => void,
@@ -40,8 +39,9 @@ const HomeHeader = ({ imageHandler, image }: Props) => {
             </AppBar>
             <Box sx={{
                 position: 'absolute',
-                right: '-212px'
+                right: '-184px'
             }}>
+                <Typography sx={{ marginBottom: '5px' }}>Selected/Default Image</Typography>
                 <SelectedImage image={image} />
             </Box>
         </Box>

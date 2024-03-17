@@ -9,8 +9,8 @@ const SelectedImage = ({ image }: Props) => {
     return (
         <Image
             id={"image"}
-            width={200}
-            height={200}
+            width={150}
+            height={150}
             src={image || '/demo-image.jpeg'}
             alt="Profile"
         />
