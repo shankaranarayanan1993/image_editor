@@ -1,16 +1,13 @@
 'use client';
 import CreativeEditorSDK from '@cesdk/cesdk-js';
 import { useEffect, useRef } from 'react';
-import createBlog from '../../utils/createBlog';
-import { fileToBlobConverter } from '../../utils/fileToBlobConverter';
-import removeImageBackground from '../../utils/removeImageBackground';
 
 interface Props {
     config: any
-    image?: File
+    image?: any
 }
 const CeSdk = ({ image, config }: Props) => {
-    console.log('CeSdk image',image)
+    console.log('CeSdk image', image)
     const cesdk_container = useRef(null);
 
     useEffect(() => {
@@ -18,27 +15,18 @@ const CeSdk = ({ image, config }: Props) => {
             CreativeEditorSDK.create(cesdk_container.current, config).then(
                 async (instance) => {
 
-                    const callbackHandler = async (blob: any) => {
-                        const objectUrl = await removeImageBackground(blob);
-                        // const objectUrl = URL.createObjectURL(blob);
-                        objectUrl && await instance.createFromImage(objectUrl);
-
+                    const callbackHandler = async (image: any) => {
+                        await instance.createFromImage(image);
                     }
 
-                    let blob;
                     try {
                         if (image) {
-                            blob = await fileToBlobConverter(image);
-                        } else {
-                            blob = await createBlog('/demo-image.jpeg');
-                        }
-                        if (blob) {
-                            callbackHandler(blob);
+                            callbackHandler(image);
                         }
                     } catch (error) {
                         console.error('Error processing image:', error);
                     }
-                   
+
                 }
             );
         }

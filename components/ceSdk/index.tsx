@@ -1,14 +1,10 @@
-import { HomeContxt } from '@/data/homeContxt';
 import dynamic from 'next/dynamic'
-import { useContext } from 'react';
 
 interface Props {
-    image?: File
+    image?: any,
+    imageExportHandler: (imge: any) => void;
 }
-const CreativeEditorSDKWithNoSSR = ({ image }: Props) => {
-    console.log('CreativeEditorSDKWithNoSSR image', image)
-
-    const { imagesHandler } = useContext(HomeContxt);
+const CreativeEditorSDKWithNoSSR = ({ image, imageExportHandler }: Props) => {
 
     let config = {
         license: process.env.NEXT_PUBLIC_LICENSE,
@@ -30,7 +26,7 @@ const CreativeEditorSDKWithNoSSR = ({ image }: Props) => {
             },
             onExport: (blobs: any, options: any) => {
                 const url = URL.createObjectURL(blobs[0]);
-                imagesHandler(url)
+                imageExportHandler(url)
             }
         },
         ui: {
