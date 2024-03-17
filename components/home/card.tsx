@@ -3,17 +3,17 @@ import Image from "next/image";
 import Grid from "@mui/material/Grid";
 
 interface Props {
-  item: any;
+  image: string;
 }
 
-const Card = ({ item }: Props) => {
+const Card = ({ image }: Props) => {
   return (
-    <Grid item xs={4} sx={{ boxShadow: 5}}>
+    <Grid item xs={4} sx={{ boxShadow: 5, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <Image
         id={"image"}
         width={300}
         height={300}
-        src={item || "/placeholder.png"}
+        src={image || "/placeholder.png"}
         alt="Profile"
       />
     </Grid>

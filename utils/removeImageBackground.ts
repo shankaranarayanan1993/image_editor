@@ -1,5 +1,5 @@
 import imglyRemoveBackground from "@imgly/background-removal";
-const removeImageBackground = async (blob: any) => {
+const removeImageBackground = async (blob: File | Blob | string) => {
   try {
     return imglyRemoveBackground(blob).then((res: Blob) => {
       const objectURL = URL.createObjectURL(res);

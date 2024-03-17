@@ -3,8 +3,8 @@ import { Toolbar, Button, Input, Box, Typography } from "@mui/material";
 import SelectedImage from "./selectedImage";
 
 interface Props {
-  imageHandler: (data: any) => void;
-  image: any;
+  imageHandler: (data: File) => void;
+  image: string;
 }
 
 const HomeHeader = ({ imageHandler, image }: Props) => {

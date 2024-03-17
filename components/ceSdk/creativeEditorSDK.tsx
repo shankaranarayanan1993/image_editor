@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 interface Props {
   config: any;
-  image?: any;
+  image?: string;
 }
 const CeSdk = ({ image, config }: Props) => {
   console.log("CeSdk image", image);
@@ -21,7 +21,7 @@ const CeSdk = ({ image, config }: Props) => {
 
   const initialiseContainer = (sdk: any) => {
     CreativeEditorSDK.create(sdk, config).then(async (instance) => {
-      const callbackHandler = async (image: any) => {
+      const callbackHandler = async (image: string) => {
         await instance.createFromImage(image);
       };
       try {

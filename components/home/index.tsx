@@ -10,9 +10,9 @@ import createBlog from "@/utils/createBlog";
 const DEFAULT_ARRAY = new Array(6).fill("");
 
 const Home = () => {
-  const [importedImage, setImportedImage] = useState<any>();
-  const [bgRemovedImage, setBgRemovedImage] = useState<any>();
-  const [savedImages, setSavedImages] = useState<any>(DEFAULT_ARRAY);
+  const [importedImage, setImportedImage] = useState<string>("");
+  const [bgRemovedImage, setBgRemovedImage] = useState<string>("");
+  const [savedImages, setSavedImages] = useState<string[]>(DEFAULT_ARRAY);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
   useEffect(() => {
@@ -20,13 +20,13 @@ const Home = () => {
   }, []);
 
   const resetHandler = () => {
-    setBgRemovedImage(null);
-    setSavedImages((preState: any) => preState.map((item: string) => ""));
+    setBgRemovedImage("");
+    setSavedImages((preState: string[]) => preState.map((image: string) => ""));
     setCurrentImageIndex(0);
   };
 
-  const imageExportHandler = (data: any) => {
-    setSavedImages((preState: any) => {
+  const imageExportHandler = (data: string) => {
+    setSavedImages((preState: string[]) => {
       let newItems = preState;
       newItems[currentImageIndex] = data;
       return newItems;
@@ -34,17 +34,17 @@ const Home = () => {
     setCurrentImageIndex((preState) => (preState === 5 ? 0 : preState + 1));
   };
 
-  const imageUploadHandler = async (data: any) => {
+  const imageUploadHandler = async (data: File) => {
     resetHandler();
     setImportedImage(URL.createObjectURL(data));
     const objectUrl = await removeImageBackground(data);
-    setBgRemovedImage(objectUrl);
+    objectUrl && setBgRemovedImage(objectUrl);
   };
 
   const demoImageHandler = async () => {
     const blob = await createBlog("/demo-image.jpeg");
-    const objectUrl = await removeImageBackground(blob);
-    setBgRemovedImage(objectUrl);
+    const objectUrl = blob && await removeImageBackground(blob);
+    objectUrl && setBgRemovedImage(objectUrl);
   };
 
   return (
@@ -78,8 +78,8 @@ const Home = () => {
         Result of edited image:
       </Box>
       <Grid container spacing={0} sx={{ marginTop: "20px" }}>
-        {savedImages?.map((item: any, index: number) => (
-          <Card key={index + item} item={item} />
+        {savedImages?.map((image: string, index: number) => (
+          <Card key={index + image} image={image} />
         ))}
       </Grid>
     </>

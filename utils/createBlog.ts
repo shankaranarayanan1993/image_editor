@@ -1,4 +1,4 @@
-const createBlog: any = async (filePath: string) => {
+const createBlog = async (filePath: string) => {
   try {
     const blob = await fetch(filePath).then((response) => response.blob());
     return blob;
