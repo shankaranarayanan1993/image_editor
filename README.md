@@ -45,13 +45,16 @@ Below are the implementation of the project
 4. Load the provided headshot onto the CE.SDK Engine canvas and Customize Background
 
 5.  **Note**: To customise the background, do the following steps
-      a. Move the image from its place then click on background , 
-      b. click on color option and choose gradient
-      c. now you can superimpose and move back the image.The background will be applied
-      d. The result is then added to grid.
+      1. Move the Image: Move the image from its place →
+      2. Access Background Settings: Click on the background →
+      3. Choose Gradient: Click on the color option and choose the gradient →
+      4. Superimpose the Image: Now you can superimpose and move back the image. The background will be applied →
+      5. The result is then added to grid.
 
 6. You can choose multiple versions of the image of the headshot with different backgrounds and those are displayed in a grid on the webpage.
 
 7. Upload Functionality
    You can also upload a picture to the application
+
+8. For detailed documentation, please see the document shared.
 
