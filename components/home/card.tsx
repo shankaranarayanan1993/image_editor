@@ -8,11 +8,11 @@ interface Props {
 
 const Card = ({ image }: Props) => {
   return (
-    <Grid item xs={4} sx={{ boxShadow: 5, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <Grid item xs={4} sx={{ boxShadow: 5, display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '3px'}}>
       <Image
         id={"image"}
-        width={300}
-        height={300}
+        width={380}
+        height={380}
         src={image || "/placeholder.png"}
         alt="Profile"
       />
