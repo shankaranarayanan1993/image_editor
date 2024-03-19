@@ -1,6 +1,7 @@
 import AppBar from "@mui/material/AppBar";
 import { Toolbar, Button, Input, Box, Typography } from "@mui/material";
 import SelectedImage from "./selectedImage";
+import Image from "next/image";
 
 interface Props {
   imageHandler: (data: File) => void;
@@ -22,25 +23,39 @@ const HomeHeader = ({ imageHandler, image }: Props) => {
         alignItems: "flex-start",
       }}
     >
-      <AppBar position="static">
+      <AppBar position="static" sx={{ backgroundColor: "#3a99f2" }}>
         <Toolbar
           sx={{ display: "flex", justifyContent: "flex-end", gap: "20px" }}
         >
-          <Input
-            id="file-upload"
-            type="file"
-            inputProps={{
-              "aria-label": "upload file",
-              accept: "image/png, image/jpg, image/jpeg",
-            }}
-            onChange={handleFileUpload}
-            style={{ display: "none" }}
-          />
-          <label htmlFor="file-upload">
-            <Button color="inherit" component="span">
-              Upload
-            </Button>
-          </label>
+          <Typography sx={{ fontWeight: 'bold', marginRight: '35%', fontSize: '18px' }}>
+            Image Editor
+          </Typography>
+          <Box>
+            <Input
+              id="file-upload"
+              type="file"
+              inputProps={{
+                "aria-label": "upload file",
+                accept: "image/png, image/jpg, image/jpeg",
+              }}
+              onChange={handleFileUpload}
+              style={{ display: "none" }}
+            />
+            <label htmlFor="file-upload" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }}>
+              <Button color="inherit" component="span" sx={{
+                fontWeight: 'bold',
+                color: '#fffff !important'
+              }}>
+                Upload
+              </Button>
+              <Image
+                alt={"Upload"}
+                src={'/upload-icon.svg'}
+                width={20}
+                height={18}
+              />
+            </label>
+          </Box>
         </Toolbar>
       </AppBar>
       <Box

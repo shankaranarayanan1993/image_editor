@@ -1,6 +1,6 @@
 "use client";
 import CreativeEditorSDK from "@cesdk/cesdk-js";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 interface Props {
   config: any;
@@ -10,16 +10,7 @@ const CeSdk = ({ image, config }: Props) => {
   console.log("CeSdk image", image);
   const cesdk_container = useRef(null);
 
-  useEffect(() => {
-    if (cesdk_container.current) {
-      initialiseContainer(cesdk_container.current);
-    }
-    return () => {
-      cesdk_container.current = null;
-    };
-  }, [config, image]);
-
-  const initialiseContainer = (sdk: any) => {
+  const initialiseContainer = useCallback((sdk: any) => {
     CreativeEditorSDK.create(sdk, config).then(async (instance) => {
       const callbackHandler = async (image: string) => {
         await instance.createFromImage(image);
@@ -32,7 +23,16 @@ const CeSdk = ({ image, config }: Props) => {
         console.error("Error processing image:", error);
       }
     });
-  };
+  }, [image, config]);
+
+  useEffect(() => {
+    if (cesdk_container.current) {
+      initialiseContainer(cesdk_container.current);
+    }
+    return () => {
+      cesdk_container.current = null;
+    };
+  }, [config, image, initialiseContainer]);
 
   return (
     <div ref={cesdk_container} style={{ width: "100%", height: "400px" }}></div>

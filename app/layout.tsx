@@ -14,7 +14,13 @@ export default function RootLayout({
 }>) {
   const darkTheme = createTheme({
     palette: {
-      mode: "dark"
+      mode: "dark",
+      background: {
+        default: '#E5E4E2',
+      },
+      text: {
+        primary: "#000000",
+      },
     },
   });
   return (
